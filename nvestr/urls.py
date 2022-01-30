@@ -15,8 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
+from . import views
 
+app_name = 'nvestr'
 urlpatterns = [
+    path('', views.home_page),
     path('market/', include('market.urls')),
     path('admin/', admin.site.urls),
 ]
