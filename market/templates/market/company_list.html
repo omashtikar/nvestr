@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Company List</title>
+    <style>
+        h1 {
+          color: #3B0B39;
+        }
+        table {
+          border: 3px solid #3B0B39;
+          width: 50%;
+        }
+        th {
+          background: #3B0B39;
+          color: white;
+          text-align: center;
+        }
+        td {
+          color: #3B0B39;
+          text-align: center;
+        }
+    </style>
+</head>
+<body>
+<center>
+<h1>Company List</h1>
+{% if company_list %}
+<table>
+    <tr>
+        <th>Symbol</th>
+        <th>Company Name</th>
+    </tr>
+    {% for company in company_list %}
+    <tr>
+        <td>{{ company.symbol }}</td>
+        <td>{{ company.company_name }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% else %}
+    <h3>No companies found.</h3>
+    <p>Please run the command:</p>
+    <blockquote>python exchange_adapter/import_exchange_data.py</blockquote>
+{% endif %}
+</center>
+</body>
+</html>
