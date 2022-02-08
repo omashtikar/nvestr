@@ -33,7 +33,7 @@
     </tr>
     {% for company in company_list %}
     <tr>
-        <td>{{ company.symbol }}</td>
+        <td><a href="{% url 'market:company_data' company.id %}">{{ company.symbol }}</a></td>
         <td>{{ company.company_name }}</td>
     </tr>
     {% endfor %}

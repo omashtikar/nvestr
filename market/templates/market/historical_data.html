@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ company.company_name }}</title>
+    <style>
+        h1, h2, h3, h4 {
+          text-align: center;
+          color: #3B0B39;
+        }
+        table {
+          border: 3px solid #3B0B39;
+          width: 50%;
+        }
+        th {
+          background: #3B0B39;
+          color: white;
+          text-align: center;
+        }
+        td {
+          color: #3B0B39;
+          text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>{{ company.company_name }}</h1>
+    <h3>{{ company.symbol }}</h3>
+    <center>
+        {% if historical_data_list %}
+        <table>
+            <tr>
+                <th>Date</th>
+                <th>Open</th>
+                <th>High</th>
+                <th>Low</th>
+                <th>Close</th>
+                <th>Volume</th>
+                <th>20 Day MA</th>
+                <th>50 Day MA</th>
+            </tr>
+            {% for hist_data_row in historical_data_list %}
+            <tr>
+                <td>{{ hist_data_row.data.trading_date }}</td>
+                <td>{{ hist_data_row.data.open|floatformat:2 }}</td>
+                <td>{{ hist_data_row.data.high|floatformat:2 }}</td>
+                <td>{{ hist_data_row.data.low|floatformat:2 }}</td>
+                <td>{{ hist_data_row.data.close|floatformat:2 }}</td>
+                <td>{{ hist_data_row.data.volume }}</td>
+                <td>{{ hist_data_row.ma_20|floatformat:2 }}</td>
+                <td>{{ hist_data_row.ma_50|floatformat:2 }}</td>
+
+            </tr>
+            {% endfor %}
+        </table>
+        {% else %}
+        <h4>No historical data found.</h4>
+        {% endif %}
+    </center>
+</body>
+</html>
