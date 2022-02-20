@@ -10,7 +10,7 @@
         }
         table {
           border: 3px solid #3B0B39;
-          width: 50%;
+          width: 75%;
         }
         th {
           background: #3B0B39;
@@ -38,6 +38,8 @@
                 <th>Volume</th>
                 <th>20 Day MA</th>
                 <th>50 Day MA</th>
+                <th>Trend</th>
+                <th>Signal</th>
             </tr>
             {% for hist_data_row in historical_data_list %}
             <tr>
@@ -49,7 +51,16 @@
                 <td>{{ hist_data_row.data.volume }}</td>
                 <td>{{ hist_data_row.ma_20|floatformat:2 }}</td>
                 <td>{{ hist_data_row.ma_50|floatformat:2 }}</td>
-
+                {% if hist_data_row.trend == 1 %}
+                <td>&#x2197;</td>
+                {% endif %}
+                {% if hist_data_row.trend == 2 %}
+                <td>&#x2198;</td>
+                {% endif %}
+                {% if hist_data_row.trend == 0 %}
+                <td> </td>
+                {% endif %}
+                <td>{{ hist_data_row.signal }}</td>
             </tr>
             {% endfor %}
         </table>
