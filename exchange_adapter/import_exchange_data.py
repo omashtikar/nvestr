@@ -12,7 +12,7 @@ print(yf_ticker.info['longName'])
 update_or_create_response = Company.objects.update_or_create({'company_name': yf_ticker.info['longName']}, symbol = get_symbol)
 django_models_company = update_or_create_response[0]
 
-hist = yf_ticker.history(period="max").to_dict('index')
+hist = yf_ticker.history(period="2y").to_dict('index')
 
 for trade_date_from_hist in hist:
     HistoricalMarketData.objects.update_or_create({'open': hist[trade_date_from_hist]['Open'],
