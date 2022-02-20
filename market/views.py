@@ -2,7 +2,8 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from .models import Company, HistoricalMarketData
 from .moving_average import moving_average
-from .model_extensions import HistoricalDataRow
+from .model_extensions import HistoricalDataRow, set_trend
+
 
 def index(request):
     company_list = list(Company.objects.all())
@@ -34,6 +35,8 @@ def company_data(request, company_id):
             ma_50 = ma_50_list[counter]
         rows.append(HistoricalDataRow(h, ma_20, ma_50))
         counter += 1
+
+    rows = set_trend(rows)
 
     context = {'historical_data_list': rows, 'company': company_obj}
     return render(request, 'market/historical_data.html', context)
